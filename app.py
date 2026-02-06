@@ -123,9 +123,21 @@ with st.sidebar:
             st.session_state.messages = [{"role": "assistant", "content": SCENARIOS[choice]["welcome"]}]
             st.rerun()
         st.write("---")
-        st.write(f"AUDACE: {st.session_state.audace}%"); st.progress(st.session_state.audace / 100)
-        st.write(f"CLARTÉ: {st.session_state.clarte}%"); st.progress(st.session_state.clarte / 100)
-        st.write(f"AUTORITÉ: {st.session_state.autorite}%"); st.progress(st.session_state.autorite / 100)
+       # --- AFFICHAGE DES SCORES SÉCURISÉS ---
+        # 1. AUDACE
+        st.write(f"AUDACE: {st.session_state.audace}%")
+        score_audace = min(max(st.session_state.audace / 100, 0.0), 1.0)
+        st.progress(score_audace)
+
+        # 2. CLARTÉ
+        st.write(f"CLARTÉ: {st.session_state.clarte}%")
+        score_clarte = min(max(st.session_state.clarte / 100, 0.0), 1.0)
+        st.progress(score_clarte)
+
+        # 3. AUTORITÉ
+        st.write(f"AUTORITÉ: {st.session_state.autorite}%")
+        score_autorite = min(max(st.session_state.autorite / 100, 0.0), 1.0)
+        st.progress(score_autorite)
         total = int((st.session_state.audace + st.session_state.clarte + st.session_state.autorite) / 3)
         st.markdown(f'<div class="big-score">{total}%</div>', unsafe_allow_html=True)
         if st.button("QUITTER"): st.session_state.user_verified = False; st.rerun()
