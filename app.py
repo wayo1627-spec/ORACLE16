@@ -12,7 +12,17 @@ st.set_page_config(
     layout="wide", 
     initial_sidebar_state="expanded" 
 )
-
+# --- SUPPRIMER LE MENU ET LE LOGO STREAMLIT ---
+# --- CODE POUR CACHER LES BOUTONS (NE PAS SUPPRIMER) ---
+hide_st_style = """
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+           
+            .stDeployButton {display:none;}
+            </style>
+            """
+st.markdown(hide_st_style, unsafe_allow_html=True)
 # --- 2. GESTION DES DONNÉES (EMAILS & HISTORIQUE) ---
 def harvest_email(email):
     """Enregistre l'email (sans doublon)"""
